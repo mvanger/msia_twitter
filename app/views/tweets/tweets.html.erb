@@ -1,0 +1,20 @@
+<h3><a href="/">Back</a></h3>
+<h1>Twitter Machine of @<%= @username %></h1>
+<h3><%= @user.name %></h3>
+  <img src="<%= @user.profile_image_url.gsub('_normal', '') %>" />
+<h4><%= @user.description %></h4>
+<p>Location: <%= @user.location %></p>
+<p>Number of Tweets: <%= @user.statuses_count %></p>
+<p>Number of Followers: <%= @user.followers_count %></p>
+<p>Number of Following: <%= @user.friends_count %></p>
+<% if @user.protected %>
+  <h1>PROTECTED ACCOUNT</h1>
+<% end %>
+<ul>
+  <% @my_tweets.each do |tweet| %>
+    <li><a href="http://twitter.com/<%= @username %>/status/<%= tweet[:id] %>"><%= tweet[:text] %></a></li>
+     <% tweet[:media].each do |photo| %>
+      <img src="<%= photo[:media_url] %>" />
+     <% end %>
+  <% end %>
+</ul>
